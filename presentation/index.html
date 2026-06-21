@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>自适应共创专家团 · TT设计学院 SKILL 创新应用大赛</title>
+<style>
+  :root{
+    --ink:#16162e; --muted:#5b5b78; --line:#e9e9f3;
+    --brand1:#5b6cf0; --brand2:#8e63f2; --accent:#ff8c42; --accent2:#ffb341;
+    --bg:#f6f7fc; --card:#ffffff;
+    --grad:linear-gradient(120deg,#5b6cf0 0%,#8e63f2 55%,#a45cf0 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  section{padding:72px 0}
+  .eyebrow{display:inline-block;font-size:13px;letter-spacing:2px;font-weight:700;
+    color:var(--brand2);background:#efeaff;padding:6px 14px;border-radius:999px;margin-bottom:18px}
+  h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.5px;margin-bottom:14px}
+  h2 .u{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--muted);font-size:18px;max-width:680px}
+
+  /* HERO */
+  .hero{background:var(--grad);color:#fff;padding:84px 0 96px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(255,255,255,.25),transparent 60%);border-radius:50%}
+  .hero::before{content:"";position:absolute;left:-80px;bottom:-140px;width:360px;height:360px;
+    background:radial-gradient(circle,rgba(255,176,65,.35),transparent 60%);border-radius:50%}
+  .hero .wrap{position:relative;z-index:2}
+  .tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+  .tag{font-size:13px;font-weight:600;background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.35);padding:6px 14px;border-radius:999px;backdrop-filter:blur(6px)}
+  .hero h1{font-size:clamp(34px,6vw,60px);font-weight:900;letter-spacing:-1px;line-height:1.12;margin-bottom:10px}
+  .hero .slogan{font-size:clamp(18px,2.4vw,24px);font-weight:600;opacity:.96;margin-bottom:18px}
+  .hero p.desc{font-size:17px;opacity:.9;max-width:640px}
+  .hero .glasses{font-size:46px;margin-bottom:8px;display:block}
+
+  /* PAIN */
+  .pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:34px}
+  .pain{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+  .pain .x{color:var(--accent);font-weight:800;font-size:15px;margin-bottom:8px}
+  .pain p{color:var(--muted);font-size:15px}
+
+  /* PANEL */
+  .panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:34px}
+  .exp{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;transition:.2s;position:relative}
+  .exp:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(91,108,240,.13);border-color:#d8d8f0}
+  .exp .av{font-size:30px;width:56px;height:56px;display:flex;align-items:center;justify-content:center;
+    border-radius:14px;background:#f1f0fe;margin-bottom:12px}
+  .exp h4{font-size:17px;margin-bottom:4px}
+  .exp .role{font-size:12px;color:var(--brand2);font-weight:700;margin-bottom:10px}
+  .exp p{font-size:14px;color:var(--muted)}
+  .exp.host .av{background:linear-gradient(135deg,#ffe7d1,#ffd0a8)}
+  .exp.devil .av{background:linear-gradient(135deg,#ffe0e0,#ffc7c7)}
+
+  /* ADAPT */
+  .adapt{background:linear-gradient(180deg,#fbfbff,#f3f2fd);border-radius:28px}
+  .dims{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:34px}
+  .dim{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px}
+  .dim .n{font-size:13px;font-weight:800;color:#fff;background:var(--grad);width:34px;height:34px;
+    border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .dim h4{font-size:18px;margin-bottom:8px}
+  .dim p{font-size:14.5px;color:var(--muted)}
+  .flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:40px;justify-content:center}
+  .node{background:#fff;border:1.5px solid #ddd9f6;border-radius:14px;padding:14px 18px;font-weight:700;font-size:14px;text-align:center}
+  .node small{display:block;font-weight:500;color:var(--muted);font-size:12px;margin-top:2px}
+  .arrow{color:var(--brand2);font-size:22px;font-weight:800}
+
+  /* TEAM */
+  .team-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:34px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;position:relative}
+  .step .num{position:absolute;top:-14px;left:24px;background:var(--accent);color:#fff;font-weight:800;
+    width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+  .step h4{font-size:16px;margin:14px 0 6px}
+  .step p{font-size:14px;color:var(--muted)}
+
+  /* DEMO */
+  .chat{background:#13132b;border-radius:24px;padding:30px;margin-top:34px;color:#e9e9ff}
+  .bubble{background:#1e1e40;border-radius:14px;padding:16px 18px;margin-bottom:14px;border:1px solid #2c2c55}
+  .bubble.host{background:linear-gradient(135deg,#2a2456,#3a2a66);border-color:#473a7a}
+  .bubble .who{font-weight:800;font-size:14px;margin-bottom:6px;color:#c7b8ff}
+  .bubble.host .who{color:#ffd0a8}
+  .bubble small{color:#a9a9d6;font-size:13.5px;display:block;margin-top:4px}
+  .bubble .kw{color:#ff9c5b;font-weight:700}
+
+  /* WIN */
+  .win-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:34px}
+  .win{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+  .win .i{font-size:26px;margin-bottom:10px}
+  .win h4{font-size:16px;margin-bottom:6px}
+  .win p{font-size:14px;color:var(--muted)}
+
+  /* PRIZE strip */
+  .prize{background:var(--grad);color:#fff;border-radius:24px;padding:36px;margin-top:40px;text-align:center}
+  .prize h3{font-size:24px;font-weight:800;margin-bottom:18px}
+  .prize-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .pz{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:14px 22px;min-width:120px}
+  .pz b{font-size:22px;display:block}
+  .pz span{font-size:13px;opacity:.9}
+
+  footer{background:#13132b;color:#cfcfe8;padding:50px 0;text-align:center}
+  footer .meta{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin-top:16px;font-size:14px;color:#9a9ac4}
+  footer b{color:#fff}
+  .hint{font-size:13px;color:var(--muted);margin-top:10px}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="tag-row">
+      <span class="tag">TT设计学院 SKILL 创新应用大赛</span>
+      <span class="tag">赛道 · TT设计 / 共创</span>
+      <span class="tag">同济大学设计创意学院 × 腾讯云</span>
+    </div>
+    <span class="glasses">👓</span>
+    <h1>自适应共创专家团</h1>
+    <p class="slogan">一个设计小组,一支会自适应的 AI 专家团撑腰。</p>
+    <p class="desc">面向毕设团队 / 课程小组 / 竞赛组队的「AI 共创评审会」:自动召集 7 位专家角色,根据项目阶段与专业自动组团,多视角评审、引导团队辩论、把行动清单拆分到每位组员头上,并能切换成答辩拷问模式。</p>
+  </div>
+</header>
+
+<!-- PAIN -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">PROBLEM · 痛点</span>
+    <h2>做设计最缺的,是<span class="u">多视角的及时反馈</span></h2>
+    <p class="lead">无论一个人做毕设,还是一组人做大作业——真正让方案变强的,是不同立场的人围着它较劲。可惜这张"圆桌"往往凑不齐。</p>
+    <div class="pain-grid">
+      <div class="pain"><div class="x">导师太忙</div><p>一周见不上一次,反馈永远慢半拍。</p></div>
+      <div class="pain"><div class="x">组员视角单一</div><p>小组里大家专业相近,看不出彼此的盲区。</p></div>
+      <div class="pain"><div class="x">自己看不见自己</div><p>盯着自己的方案,永远发现不了硬伤。</p></div>
+      <div class="pain"><div class="x">答辩才被批穿</div><p>等到评审 / 答辩被问倒,已经来不及。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PANEL -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">SOLUTION · 专家天团</span>
+    <h2>把"一桌专家围着你开会"<span class="u">产品化</span></h2>
+    <p class="lead">7 位性格鲜明的 AI 专家角色,组成专属于你团队的评审圆桌——他们会吵、会互相反驳,而不是一个 AI 换 7 个标题。</p>
+    <div class="panel-grid">
+      <div class="exp host"><div class="av">🎙️</div><h4>同学姐</h4><div class="role">主持人</div><p>组织、串场、引导辩论,综合出带优先级的行动清单。</p></div>
+      <div class="exp"><div class="av">🎓</div><h4>严教授</h4><div class="role">学术导师</div><p>研究问题、创新点、方法论是否站得住。</p></div>
+      <div class="exp"><div class="av">🧭</div><h4>林教练</h4><div class="role">体验设计专家</div><p>真实用户、场景、可用性与设计质量。</p></div>
+      <div class="exp"><div class="av">🤖</div><h4>算博士</h4><div class="role">AI 技术专家</div><p>技术可行性、"自适应"是真是噱头。</p></div>
+      <div class="exp"><div class="av">⚖️</div><h4>审官</h4><div class="role">伦理与社会影响</div><p>偏见、隐私、包容性与社会风险。</p></div>
+      <div class="exp"><div class="av">💼</div><h4>周合伙人</h4><div class="role">落地与价值</div><p>价值主张、差异化、能不能走下去。</p></div>
+      <div class="exp devil"><div class="av">🔥</div><h4>评委 X</h4><div class="role">毒舌评委</div><p>唱反调,提答辩现场最难缠的那一问。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADAPT -->
+<section>
+  <div class="wrap adapt" style="padding:56px 40px">
+    <span class="eyebrow">CORE · 核心创新</span>
+    <h2>它会<span class="u">自适应</span>——这是作品的灵魂</h2>
+    <p class="lead">不是固定 7 人每次全员发言(那样又长又水)。专家团先诊断,再"自适应组团",每轮只出场 3–5 人,并公示阵容理由,让自适应<b>看得见</b>。</p>
+    <div class="dims">
+      <div class="dim"><div class="n">1</div><h4>按阶段自适应</h4><p>选题期重点是"值不值得做",答辩期重点是"扛不扛得住问"——出场专家与侧重完全不同。</p></div>
+      <div class="dim"><div class="n">2</div><h4>按专业自适应</h4><p>AI / 自适应系统类项目,算博士 + 审官必到场;文创类则换体验 + 落地专家挑大梁。</p></div>
+      <div class="dim"><div class="n">3</div><h4>按火力自适应</h4><p>🌱 鼓励 ↔ ⚖️ 标准 ↔ 🔥 答辩拷问,一句话切换点评力度。</p></div>
+    </div>
+    <div class="flow">
+      <div class="node">诊断<small>阶段·专业·火力</small></div>
+      <span class="arrow">→</span>
+      <div class="node">自适应组团<small>公示阵容理由</small></div>
+      <span class="arrow">→</span>
+      <div class="node">多视角评审<small>专家卡片</small></div>
+      <span class="arrow">→</span>
+      <div class="node">辩论 + 综合<small>P0/P1/P2 清单</small></div>
+      <span class="arrow">→</span>
+      <div class="node">答辩模拟<small>拷问演练</small></div>
+    </div>
+    <p class="hint" style="text-align:center;margin-top:24px">💡 作者专业为「AI 人工智能自适应系统」——让作品本身成为一个自适应系统的范例,<b>形式即内容</b>。</p>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">CO-CREATION · 多人协同</span>
+    <h2>一个<span class="u">团队</span>怎么一起用</h2>
+    <p class="lead">专为共创场景设计:不只点评一个人,更帮一支小组吵清分歧、达成共识、分好工。</p>
+    <div class="team-steps">
+      <div class="step"><div class="num">1</div><h4>团队提交</h4><p>小组把共同的方案 / 课题丢进来,选定当前阶段。</p></div>
+      <div class="step"><div class="num">2</div><h4>多视角评审</h4><p>专家团从各角度开火,暴露全组都没注意到的盲区。</p></div>
+      <div class="step"><div class="num">3</div><h4>引导辩论</h4><p>主持人把专家的分歧摆上台面,帮团队对齐"到底该听谁的"。</p></div>
+      <div class="step"><div class="num">4</div><h4>分工到人</h4><p>行动清单按 P0/P1/P2 拆分,可指派到每位组员,协同推进。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">LIVE · 真实运行</span>
+    <h2>这是它<span class="u">实际跑出来</span>的样子</h2>
+    <p class="lead">输入一份"方案阶段"的毕设(AI 自适应无障碍界面),⚖️ 标准火力。节选:</p>
+    <div class="chat">
+      <div class="bubble host">
+        <div class="who">🎙️ 同学姐(主持人)· 公示阵容</div>
+        本轮出场:算博士、审官、林教练、评委 X。
+        <small>因为你在「方案」阶段、专业是 AI 自适应系统,让技术与伦理两位主谈"自适应到底成不成立"。</small>
+      </div>
+      <div class="bubble">
+        <div class="who">🤖 算博士(AI 技术)</div>
+        <span class="kw">⚠️ 致命问题</span>:"误触超过 N 次就放大"不是 AI,是 if-else。手抖误触 vs 颠簸地铁上误触,该有不同反应,你现在分不出。
+        <small>✅ 立刻可做:把判断层升级成"多信号 + 时间窗"逻辑表。</small>
+      </div>
+      <div class="bubble">
+        <div class="who">⚖️ 审官(伦理)</div>
+        <span class="kw">⚠️ 致命问题</span>:"判定某人是视障 / 老人"= 背后贴标签。但换框架就海阔天空——你不是诊断残疾,而是识别此刻的<b>操作摩擦</b>。
+        <small>✅ 立刻可做:加一节「非标签化原则」,直接回应你的伦理困惑。</small>
+      </div>
+      <div class="bubble host">
+        <div class="who">🎯 综合 · 命门洞察</div>
+        林教练说"自动检测"是最大差异化,审官说它是最大伦理雷——其实指向<span class="kw">同一把钥匙</span>:把"检测残疾身份"重构为"检测操作摩擦",一个动作同时拆掉伦理炸弹 + 让差异化更锋利。
+        <small>P0 本周必做:① 锁定创新点一句话 ② 完成"检测摩擦而非残疾"重构。</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIN -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">WHY IT WINS · 为什么能打</span>
+    <h2>对齐大赛<span class="u">评分</span></h2>
+    <div class="win-grid">
+      <div class="win"><div class="i">⚡</div><h4>可落地、可演示</h4><p>不是 PPT 构思,是当场能跑、能交互的真实工具。</p></div>
+      <div class="win"><div class="i">🧬</div><h4>强原创、有记忆点</h4><p>"会自适应的专家团" + "形式即内容",容易出圈传播。</p></div>
+      <div class="win"><div class="i">🎯</div><h4>戳真实痛点</h4><p>每个毕设团队的刚需,评委本身大多当过被求反馈的导师。</p></div>
+      <div class="win"><div class="i">♻️</div><h4>可持续</h4><p>做完毕设还能用于竞赛、求职作品集打磨,长期有用。</p></div>
+    </div>
+
+    <div class="prize">
+      <h3>🔥 万元现金奖池 · 多奖项可叠加</h3>
+      <div class="prize-row">
+        <div class="pz"><b>10000</b><span>一等奖</span></div>
+        <div class="pz"><b>6000</b><span>二等奖</span></div>
+        <div class="pz"><b>3000</b><span>三等奖</span></div>
+        <div class="pz"><b>2000</b><span>最佳协作奖</span></div>
+        <div class="pz"><b>1000</b><span>优秀奖</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="font-size:20px;font-weight:800;color:#fff">自适应共创专家团 · Adaptive Co-Creation Expert Panel</div>
+    <div class="meta">
+      <span>参赛方向 · <b>TT设计 / 共创</b></span>
+      <span>作品形态 · <b>零代码自然语言 AI Skill</b></span>
+      <span>作者专业 · <b>AI 人工智能自适应系统</b></span>
+      <span>报名截止 · <b>6 月 23 日</b></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
